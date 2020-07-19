@@ -1,0 +1,11 @@
+@import 'header.scss';
+@import 'lib/btsrp/bootstrap.scss';
+@font-face{
+	font-family: 'PF Bague Sans Pro', sans-serif;
+	src: url('fonts/BagueSans.otf') format('truetype');
+	font-style: normal;
+	font-weight: normal;
+}
+body{
+	font-family: 'PF Bague Sans Pro', sans-serif;
+}
