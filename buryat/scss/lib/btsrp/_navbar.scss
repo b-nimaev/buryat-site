@@ -54,6 +54,8 @@
 // Used for brand, project, or site names.
 
 .navbar-brand {
+  display: flex;
+  flex-direction: column;
   padding-top: $navbar-brand-padding-y;
   padding-bottom: $navbar-brand-padding-y;
   margin-right: $navbar-brand-margin-right;
@@ -64,6 +66,9 @@
   &:hover,
   &:focus {
     text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+  p{
+    margin: 0;
   }
 }
 

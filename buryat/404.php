@@ -1,16 +1,6 @@
-<?php
-/**
- * The template for displaying 404 pages (not found)
- *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
- *
- * @package buryat
- */
+<?php get_header(); ?>
 
-get_header();
-?>
-
-	<main id="primary" class="site-main">
+	<main>
 
 		<section class="error-404 not-found">
 			<header class="page-header">

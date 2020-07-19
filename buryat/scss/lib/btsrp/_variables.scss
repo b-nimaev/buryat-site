@@ -5,7 +5,7 @@
 
 // Color system
 
-$white:    #fff !default;
+$white:    #FAFFFD !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -31,16 +31,17 @@ $grays: (
 ) !default;
 // fusv-enable
 
-$blue:    #0d6efd !default;
+$blue:    #3C91E6 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
 $red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
+$orange:  #FA824C !default;
 $yellow:  #ffc107 !default;
-$green:   #28a745 !default;
+$green:   #A2D729 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
+$coffee:    #342E37 !default;
 
 // scss-docs-start colors-map
 $colors: (
@@ -259,8 +260,8 @@ $body-text-align:           null !default;
 //
 // Style anchor elements.
 
-$link-color:                              $primary !default;
-$link-decoration:                         underline !default;
+$link-color:                              $orange !default;
+$link-decoration:                         none !default;
 $link-hover-color:                        darken($link-color, 15%) !default;
 $link-hover-decoration:                   null !default;
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)

@@ -50,7 +50,7 @@ if ( ! function_exists( 'buryat_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'buryat' ),
+				'navbar' => esc_html__( 'navbar', 'buryat' ),
 			)
 		);
 
@@ -146,11 +146,14 @@ function buryat_scripts() {
 	wp_enqueue_style( 'buryat-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_deregister_script( 'jquery' );
 
-	wp_register_script( 'buryat', get_template_directory_uri() . '/js/buryat.js', false, false, true );
-	wp_enqueue_script( 'buryat' );
+	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', false, false, true );
+	wp_enqueue_script( 'bootstrap' );
 
 	wp_register_script( 'vue', get_template_directory_uri() . '/js/vue.min.js', false, false, true );
 	wp_enqueue_script( 'vue' );
+
+	wp_register_script( 'buryat', get_template_directory_uri() . '/js/buryat.js', false, false, true );
+	wp_enqueue_script( 'buryat' );
 	
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -158,6 +161,55 @@ function buryat_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'buryat_scripts' );
+
+add_filter( 'nav_menu_css_class', '__return_empty_array' );
+add_filter( 'nav_menu_item_id', '__return_empty_string' );
+
+add_filter( 'nav_menu_css_class', 'change_menu_item_css_classes', 10, 4 );
+
+function change_menu_item_css_classes( $classes, $item, $args, $depth ) {
+	if ( $args->theme_location === 'navbar' ) {
+		$classes = [ 'nav-item' ];
+	} else {
+		$classes = [];
+	}
+
+	return $classes;
+}
+
+add_filter( 'nav_menu_link_attributes', 'nav_link_class', $priority = 10, $accepted_args = 4 );
+function nav_link_class($atts, $item, $args, $depth) {
+	if (strpos($atts['href'], home_url())===false) {
+		$atts['target'] = '_blank';
+	}
+
+	return $atts;
+}
+
+// Добавляем классы ссылкам
+add_filter( 'nav_menu_link_attributes', 'filter_nav_menu_link_attributes', 10, 4 );
+function filter_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
+
+	$atts['class'] = 'nav-link';
+
+	if ( $item->current ) {
+		$class = 'active';
+		$atts['class'] = 'nav-link active';
+	}
+
+
+	return $atts;
+}
+
+add_filter( 'nav_menu_link_attributes', 'change_nav_menu_link_attributes' );
+
+function change_nav_menu_link_attributes( $atts ) {
+	if ( strpos( $atts['href'], home_url() ) === false ) {
+		$atts['target'] = '_blank';
+	}
+
+	return $atts;
+}
 
 /**
  * Implement the Custom Header feature.

@@ -1,16 +1,6 @@
-<?php
-/**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package buryat
- */
+<?php get_header(); ?>
 
-get_header();
-?>
-
-	<main id="primary" class="site-main">
+	<main>
 
 		<?php if ( have_posts() ) : ?>
 
