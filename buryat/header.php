@@ -12,8 +12,8 @@
 <?php wp_body_open(); ?>
 
 <header>
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+		<div class="container">
 			<a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 				<p><?php bloginfo( 'name' );echo "</p>";
 				$buryat_description = get_bloginfo( 'description', 'display' );
@@ -52,6 +52,6 @@
 
 			</div>
 
-		</nav><!-- #site-navigation -->
-	</div>
+		</div>
+	</nav><!-- #site-navigation -->
 </header><!-- #masthead -->

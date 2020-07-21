@@ -144,10 +144,12 @@ add_action( 'widgets_init', 'buryat_widgets_init' );
  */
 function buryat_scripts() {
 	wp_enqueue_style( 'buryat-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_deregister_script( 'jquery' );
 
 	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', false, false, true );
 	wp_enqueue_script( 'bootstrap' );
+
+	wp_register_script( 'axios', get_template_directory_uri() . '/js/axios.min.js', false, false, true );
+	wp_enqueue_script( 'axios' );	
 
 	wp_register_script( 'vue', get_template_directory_uri() . '/js/vue.min.js', false, false, true );
 	wp_enqueue_script( 'vue' );
@@ -161,6 +163,34 @@ function buryat_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'buryat_scripts' );
+
+// Подключаем локализацию в самом конце подключаемых к выводу скриптов, чтобы скрипт
+// 'buryat', к которому мы подключаемся, точно был добавлен в очередь на вывод.
+// Заметка: код можно вставить в любое место functions.php темы
+add_action( 'wp_enqueue_scripts', 'myajax_data', 99 );
+function myajax_data(){
+
+	// Первый параметр 'buryat' означает, что код будет прикреплен к скрипту с ID 'buryat'
+	// 'buryat' должен быть добавлен в очередь на вывод, иначе WP не поймет куда вставлять код локализации
+	// Заметка: обычно этот код нужно добавлять в functions.php в том месте где подключаются скрипты, после указанного скрипта
+	wp_localize_script( 'buryat', 'myajax', 
+		array(
+			'url' => admin_url('admin-ajax.php')
+		)
+	);  
+
+}
+
+add_action('wp_ajax_nopriv_appendWord', 'appendWord_callback');
+add_action('wp_ajax_appendWord', 'appendWord_callback');
+function appendWord_callback() {
+	$whatever = intval($_POST['whatever']);
+
+	$whatever += 10;
+	echo $whatever;
+
+	wp_die();
+}
 
 add_filter( 'nav_menu_css_class', '__return_empty_array' );
 add_filter( 'nav_menu_item_id', '__return_empty_string' );
